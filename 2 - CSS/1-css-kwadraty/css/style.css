@@ -1,0 +1,14 @@
+* {
+    background-color: #808080;
+}
+
+h1 {
+    color: white;
+}
+
+.square {
+    background-color: #fea500;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+}
