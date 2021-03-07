@@ -1,0 +1,124 @@
+.square-outer {
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+.square-inner {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    border: 1px solid white;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    border: 1px solid black;
+}
+
+.top-row {
+    top: 0%;
+}
+
+.left-col {
+    left: 0%;
+}
+
+.mid-row {
+    top: 50%;
+    transform: translate(0%, -50%)
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.mid-col {
+    left: 50%;
+    transform: translate(-50%, 0%)
+}
+
+.bot-row {
+    bottom: 0%;
+}
+
+.rig-col {
+    right: 0%;
+}
+
+#sq1 {
+    background-color: tomato;
+}
+
+#sq2 {
+    background-color: olive;
+}
+
+#sq3 {
+    background-color: plum;
+}
+
+#sq4 {
+    background-color: skyblue;
+}
+
+#sq5 {
+    background-color: violet;
+}
+
+#sq6 {
+    background-color: seagreen;
+}
+
+#sq7 {
+    background-color: lime;
+}
+
+#sq8 {
+    background-color: salmon;
+}
+
+#sq9 {
+    background-color: red;
+}
+
+#c1 {
+    background-color: #333;
+}
+
+#c2 {
+    background-color: #444;
+}
+
+#c3 {
+    background-color: #555;
+}
+
+#c4 {
+    background-color: #666;
+}
+
+#c5 {
+    background-color: #777;
+}
+
+#c6 {
+    background-color: #888;
+}
+
+#c7 {
+    background-color: #999;
+}
+
+#c8 {
+    background-color: #aaa;
+}
+
+#c9 {
+    background-color: #bbb;
+}
