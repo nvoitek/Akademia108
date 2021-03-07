@@ -1,0 +1,39 @@
+* {
+    background-color: #faebd6;
+}
+
+h1 {
+    color:indigo;
+}
+
+h2 {
+    color:cadetblue;
+}
+
+.first-p {
+    color:chocolate;
+}
+
+.second-p {
+    color:crimson;
+}
+
+.first-li {
+    color: darkgreen;
+}
+
+.second-li {
+    color:darkorchid;
+}
+
+.third-li {
+   color:orangered;
+}
+
+.fourth-li {
+    color:goldenrod;
+}
+
+.fifth-li {
+    color:hotpink;
+}
