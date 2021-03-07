@@ -1,0 +1,31 @@
+.box {
+    width:150px;
+    height:150px;
+    margin:150px;
+}
+
+.top {
+    background-color: red;
+}
+.top:hover {
+    width:300px;
+    transition-duration: 1s;
+}
+
+.mid {
+    background-color: green;
+}
+.mid:hover {
+    height: 300px;
+    transition-duration: 1s;
+}
+
+.bot {
+    background-color: blue;
+}
+.bot:hover {
+    width:300px;
+    height: 300px;
+    transition: linear;
+    transition-duration: 2s;
+}
