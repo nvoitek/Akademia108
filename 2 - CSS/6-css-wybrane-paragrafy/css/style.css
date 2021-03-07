@@ -1,0 +1,13 @@
+.par {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.opac {
+    opacity: 0.5;
+}
