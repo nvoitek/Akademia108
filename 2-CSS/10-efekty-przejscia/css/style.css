@@ -2,7 +2,7 @@
     width:150px;
     height:150px;
     margin:150px;
-    transition: 1s;
+    transition: all 1s;
 }
 
 .top {
