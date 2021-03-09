@@ -2,11 +2,11 @@
     width:150px;
     height:150px;
     margin:150px;
+    transition: 1s;
 }
 
 .top {
     background-color: red;
-    transition: 1s;
 }
 
 .top:hover {
@@ -15,7 +15,6 @@
 
 .mid {
     background-color: green;
-    transition: 1s;
 }
 
 .mid:hover {
