@@ -2,42 +2,130 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Responsive galery</title>
+	<title>Moje portfolio</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    <!-- Normalize CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
 
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<section id="gallery">
-		<header>
-			<h2>Moja galeria</h2>
-			<p>Najnowsze prace</p>
-		</header>
-		<figure>
-			<img src="img/image1.jpg" alt="image 1">
-			<figcaption>Obraz 1.</figcaption>
-		</figure>
-		<figure>
-			<img src="img/image2.jpg" alt="image 2">
-			<figcaption>Obraz 2.</figcaption>
-		</figure>
-		<figure>
-			<img src="img/image3.jpg" alt="image 3">
-			<figcaption>Obraz 3.</figcaption>
-		</figure>
-		<figure>
-			<img src="img/image4.jpg" alt="image 4">
-			<figcaption>Obraz 4.</figcaption>
-		</figure>
-		<figure>
-			<img src="img/image5.jpg" alt="image 5">
-			<figcaption>Obraz 5.</figcaption>
-		</figure>
-		<figure>
-			<img src="img/image6.jpg" alt="image 6">
-			<figcaption>Obraz 6.</figcaption>
-		</figure>
+	<header class="header">
+		<div class="header-container">
+			<h1>Front end developer</h1>
+			<hr>
+			<p>HTML <span>&#183;</span> CSS <span>&#183;</span> JavaScript</p>
+			<button class="button">Dowiedz się więcej</button>
+		</div>
+	</header>
+	<nav class="nav">
+		<div class="nav-container">
+			<a class="nav-item" href="#about-me">O mnie</a>
+			<a class="nav-item" href="#portfolio">Portfolio</a>
+			<a class="nav-item" href="footer">Kontakt</a>
+		</div>
+	</nav>
+	<section id="about-me" class="about-me">
+		<div class="about-me-container">
+			<header>
+				<h2>O Mnie</h2>
+				<hr>
+			</header>
+			<img class="img-round" src="./img/about.jpg">
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum odit libero temporibus adipisci dicta? Iusto labore, laudantium eveniet minus, quo est molestias sed atque doloribus eos aperiam, laboriosam repellendus ipsam!</p>
+			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum odit libero temporibus adipisci dicta? Iusto labore, laudantium eveniet minus, quo est molestias sed atque doloribus eos aperiam, laboriosam repellendus ipsam!</p>
+			<button class="button">Moje portfolio</button>
+		</div>
 	</section>
+	<section id="portfolio" class="portfolio">
+		<div class="portfolio-container">
+			<header>
+				<h2>Portfolio</h2>
+				<hr>
+			</header>
+			<div class="gallery-container">
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-1.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-2.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-3.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-4.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-5.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-6.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-7.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-8.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-9.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-10.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-11.jpg">
+					<h3>Projekt</h3>
+				</a>
+				<a class="gallery-item" href>
+					<img src="./img/portfolio/photo-12.jpg">
+					<h3>Projekt</h3>
+				</a>
+			</div>
+		</div>
+	</section>
+	<section id="contact" class="contact">
+		<div class="contact-container">
+			<header>
+				<h2>Kontakt</h2>
+				<hr>
+			</header>
+			<form class="form">
+				<input class="input" placeholder="Imię" type="text">
+				<input class="input" placeholder="Email" type="text">
+				<textarea class="msg-input input" placeholder="Wiadomość"></textarea>	
+				<input class="submit" type="submit" value="Prześlij">
+			</form>
+			<div class="icons-container">
+                <a href="" class="social-link"><i class="fab fa-facebook-square"></i></a>
+                <a href="" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="" class="social-link"><i class="fab fa-youtube"></i></a>
+			</div>
+		</div>
+	</section>
+	<footer class="footer">
+		<div class="footer-container">
+			<p>Copyright © Akademia 108 - Szkoła Programowania</p>
+		</div>
+	</footer>
 </body>
 </html>
