@@ -126,8 +126,6 @@ hr {
 	align-items: center;
 	margin-top: 5%;
 	margin-bottom: 5%;
-	padding-left: 10%;
-	padding-right: 10%;
 	max-width: 1170px;
 }
 
@@ -135,6 +133,7 @@ hr {
 	margin: 0%;
 	flex-basis: 25%;
 	position: relative;
+	height: 220px;
 }
 
 a>h3 {
@@ -146,6 +145,8 @@ a>h3 {
     height: 100%;
 	font-size: 2em;
 	margin: auto;
+	transition: all 0.5s;
+	line-height: 220px;
 }
 
 .gallery-item:hover>h3 {
@@ -159,6 +160,7 @@ a>img {
 	display: block;
 	width: 100%;
     height: 100%;
+	object-fit: cover;
 }
 
 /*contact*/
