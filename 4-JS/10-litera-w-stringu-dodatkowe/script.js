@@ -2,13 +2,13 @@ function countLetterInWord(word, letter) {
   let count = 0;
 
   for (let letterInWord of word) {
-    if (letterInWord == letter) {
+    if (letterInWord == letter.toUpperCase() || letterInWord == letter.toLowerCase()) {
       count++;
     }
   }
 
-  //let cnt = word.match(new RegExp(letter, 'g')).length
-  //console.log(cnt)
+  let cnt = word.match(new RegExp(letter, 'gi')).length
+  console.log(cnt)
 
   return count;
 }
