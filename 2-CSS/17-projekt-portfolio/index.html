@@ -17,104 +17,109 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<header class="header section">
+	<header class="header">
 		<div class="header-container">
 			<h1>Front end developer</h1>
 			<hr>
 			<p>HTML <span>&#183;</span> CSS <span>&#183;</span> JavaScript</p>
-			<button class="button">Dowiedz się więcej</button>
+			<a href="" class="button">Dowiedz się więcej</a>
 		</div>
 	</header>
-	<nav class="nav">
-		<div class="nav-container">
-			<a class="nav-item" href="#about-me">O mnie</a>
-			<a class="nav-item" href="#portfolio">Portfolio</a>
-			<a class="nav-item" href="footer">Kontakt</a>
-		</div>
-	</nav>
+	
+    <nav class="nav">
+        <label for="drop-nav">Menu</label>
+        <input type="checkbox" id="drop-nav">
+        <ul>
+            <li class="nav-item"><a href="#about-me">O mnie</a></li>
+            <li class="nav-item"><a href="#portfolio">Portfolio</a></li>
+            <li class="nav-item"><a href="#contact">Kontakt</a></li>
+        </ul>
+    </nav>
+
 	<section id="about-me" class="about-me section">
-		<div class="about-me-container">
-			<header>
+		<div class="container">
+			<header class="section-header">
 				<h2>O Mnie</h2>
 				<hr>
 			</header>
-			<img class="img-round" src="./img/about.jpg">
+			<img class="img-round" src="./img/about.jpg" alt="Joanna Nowak ">
 			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum odit libero temporibus adipisci dicta? Iusto labore, laudantium eveniet minus, quo est molestias sed atque doloribus eos aperiam, laboriosam repellendus ipsam!</p>
 			<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illum odit libero temporibus adipisci dicta? Iusto labore, laudantium eveniet minus, quo est molestias sed atque doloribus eos aperiam, laboriosam repellendus ipsam!</p>
-			<button class="button">Moje portfolio</button>
+			<a href="" class="button">Moje portfolio</a>
 		</div>
 	</section>
+
 	<section id="portfolio" class="portfolio section">
-		<div class="portfolio-container">
-			<header>
+		<div class="container">
+			<header class="section-header">
 				<h2>Portfolio</h2>
 				<hr>
 			</header>
-			<div class="gallery-container">
+			<div class="gallery-wrapper">
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-1.jpg">
+					<img src="./img/portfolio/photo-1.jpg" alt="Photo 1">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-2.jpg">
+					<img src="./img/portfolio/photo-2.jpg" alt="Photo 2">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-3.jpg">
+					<img src="./img/portfolio/photo-3.jpg" alt="Photo 3">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-4.jpg">
+					<img src="./img/portfolio/photo-4.jpg" alt="Photo 4">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-5.jpg">
+					<img src="./img/portfolio/photo-5.jpg" alt="Photo 5">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-6.jpg">
+					<img src="./img/portfolio/photo-6.jpg" alt="Photo 6">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-7.jpg">
+					<img src="./img/portfolio/photo-7.jpg" alt="Photo 7">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-8.jpg">
+					<img src="./img/portfolio/photo-8.jpg" alt="Photo 8">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-9.jpg">
+					<img src="./img/portfolio/photo-9.jpg" alt="Photo 9">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-10.jpg">
+					<img src="./img/portfolio/photo-10.jpg" alt="Photo 10">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-11.jpg">
+					<img src="./img/portfolio/photo-11.jpg" alt="Photo 11">
 					<h3>Projekt</h3>
 				</a>
 				<a class="gallery-item" href>
-					<img src="./img/portfolio/photo-12.jpg">
+					<img src="./img/portfolio/photo-12.jpg" alt="Photo 12">
 					<h3>Projekt</h3>
 				</a>
 			</div>
 		</div>
 	</section>
 	<section id="contact" class="contact section">
-		<div class="contact-container">
-			<header>
+		<div class="container">
+			<header class="section-header">
 				<h2>Kontakt</h2>
 				<hr>
 			</header>
 			<form class="form">
 				<input class="input" placeholder="Imię" type="text">
 				<input class="input" placeholder="Email" type="text">
-				<textarea class="msg-input input" placeholder="Wiadomość"></textarea>	
-				<input class="submit" type="submit" value="Prześlij">
+				<textarea class="msg-input" placeholder="Wiadomość"></textarea>	
+				<input class="button" type="submit" value="Prześlij">
 			</form>
-			<div class="icons-container">
+			<div class="social-links-wrapper">
                 <a href="" class="social-link"><i class="fab fa-facebook-square"></i></a>
                 <a href="" class="social-link"><i class="fab fa-twitter"></i></a>
                 <a href="" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -123,7 +128,7 @@
 		</div>
 	</section>
 	<footer class="footer">
-		<div class="footer-container">
+		<div class="container">
 			<p>Copyright © Akademia 108 - Szkoła Programowania</p>
 		</div>
 	</footer>
