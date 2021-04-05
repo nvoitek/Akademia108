@@ -8,9 +8,16 @@
   </head>
   <body>
     <form id="form" action="" >
-      <label>Im.ię: <input type="text" name="fname" value="Krystian"></label>
+      <label>Imię i nazwisko: <input type="text" name="name"></label>
       <br /> 
-      <label>Nazwisko: <input type="text" name="lname" value="Dziopa"></label>
+      <!--Not type email because we validate by hand-->
+      <label>Email: <input type="text" name="email"></label>
+      <br />
+      <label>Wszystkie zgody: <input type="checkbox" name="allCheckbox"></label>
+      <br />
+      <label>Zgoda marketingowa 1: <input type="checkbox" name="firstCheckbox"></label>
+      <br />
+      <label>Zgoda marketingowa 2: <input type="checkbox" name="secondCheckbox"></label>
       <br />
       <input type="submit" value="Submit">
       <script src="script.js"></script>
