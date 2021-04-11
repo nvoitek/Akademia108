@@ -150,6 +150,7 @@ label[for="drop-nav"] {
 .gallery-wrapper {
 	display: flex;
 	flex-wrap: wrap;
+	margin: auto;
 }
 
 .gallery-wrapper .gallery-item {
