@@ -1,0 +1,19 @@
+h1 {
+    color:lightblue;
+}
+
+h3 {
+    color:lightcoral;
+}
+
+p {
+    color:lightseagreen;
+}
+
+h1 + h3 {
+    color:mediumpurple;
+}
+
+* {
+    background-color: lightyellow;
+}

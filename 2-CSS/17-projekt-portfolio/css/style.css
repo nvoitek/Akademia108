@@ -1,0 +1,308 @@
+/*general*/
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+hr {
+	width: 100px;
+	color: #007bff;
+	border: 1px solid;
+	border-bottom: 0;
+}
+
+.button {
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #333;
+	background-color: transparent;
+	border: 1px solid #007bff;
+	transition: all 0.5s;
+	padding: 14px 20px;
+	display: inline-block;
+	margin: auto;
+	cursor: pointer;
+}
+
+.button:hover {
+	color: white;
+	background-color: #007bff;
+}
+
+.section {
+	padding: 120px 0;
+}
+
+.section-header {
+	margin-bottom: 75px;
+}
+
+.section-header h2 {
+	color: #333;
+	font-size: 1.9em;
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 400;
+}
+
+.container {
+	max-width: 1170px;
+	margin: 0 auto;
+}
+
+/*header*/
+.header {
+	height: 70vh;
+	background-image: url("./../img/header.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.header-container {
+	text-align: center;
+}
+
+.header-container h1 {
+	color: #007bff;
+	font-size: 4.2em;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.header-container p {
+	font-size: #333;
+	font-size: 1.3em;
+	margin: 40px 0;
+}
+
+.header-container p span{
+	color: #007bff;
+}
+
+/*nav*/
+.nav {
+	text-transform: uppercase;
+	background-color: #007bff;
+}
+
+.nav ul {
+	margin: 0;
+	padding: 10px 0;
+	text-align: center;
+}
+
+.nav-item  {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.nav-item a {
+	color: white;
+	text-decoration: none;
+	padding: 14px 20px;
+	display: block;
+	transition: all 0.5s;
+}
+
+.nav-item a:hover {
+	color: #007bff;
+	background-color: white;
+}
+
+#drop-nav {
+    display: none;
+}
+
+label[for="drop-nav"] {
+    display: none;
+}
+
+/*about me*/
+.about-me {
+	text-align: center;
+}
+
+.about-me p {
+	max-width: 700px;
+	margin: 40px auto 10px auto;
+	color: #777;
+    line-height: 1.4;
+}
+
+.about-me .img-round {
+	border-radius: 50%;
+}
+
+/*portfolio*/
+.portfolio {
+	background-color: #f2f1ed;
+}
+
+/*gallery*/
+
+.gallery-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+}
+
+.gallery-wrapper .gallery-item {
+	position: relative;
+	margin: 0;
+	flex-basis: 25%;
+	height: 220px;
+}
+
+.gallery-wrapper .gallery-item h3 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+    height: 100%;
+	background-color: rgba(0, 123, 255, 0.8);
+	margin: 0;
+	text-align: center;
+	line-height: 220px;
+	color: white;
+	font-weight: 300;
+	font-size: 2em;
+	opacity: 0;
+	transition: all 0.5s;
+}
+
+.gallery-wrapper .gallery-item h3:hover {
+	opacity: 1;
+}
+
+.gallery-wrapper .gallery-item img {
+	display: block;
+	width: 100%;
+    height: 100%;
+	object-fit: cover;
+}
+
+/*contact*/
+
+.contact .form {
+	max-width: 700px;
+	margin: 40px auto 30px auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.contact .input[type="text"],
+.contact .input[type="email"] {
+	flex-basis: 45%;
+	padding: 15px;
+	margin-bottom: 15px;
+}
+
+.contact .msg-input {
+	flex-basis: 100%;
+	padding: 15px;
+	margin-bottom: 15px;
+	height: 100px;
+}
+
+/*social-links*/
+
+.social-links-wrapper {
+	margin-top: 75px;
+	text-align: center;
+}
+
+.social-links-wrapper .social-link {
+	font-size: 2.5em;
+	color: #007bff;
+	transition: all 0.5s;
+	display: inline-block;
+	margin: 0 25px;
+}
+
+.social-links-wrapper .social-link:hover {
+    color: #777;
+	cursor: pointer;
+}
+
+/*footer*/
+.footer {
+	background-color: #f2f1ed;
+	color: #777;
+	text-align: center;
+	padding: 30px;
+}
+
+@media screen and (max-width: 1200px)  {
+	.gallery-wrapper {
+		max-width: 992px;
+	}
+}
+
+@media screen and (max-width: 992px)  {
+	.gallery-wrapper {
+		max-width: 768px;
+	}
+	
+	.gallery-wrapper .gallery-item {
+		flex-basis: 50%;
+	}	
+}
+
+@media screen and (max-width: 768px)  {
+	.gallery-wrapper {
+		max-width: 95%;
+	}
+	
+	.gallery-wrapper .gallery-item {
+		flex-basis: 100%;
+	}	
+}
+
+@media (max-width: 480px) {
+    .header .header-container h1 {
+        font-size: 3em;
+    }
+
+    .about-me .img-round  {
+        max-height: 200px;
+        max-width: 200px;
+    }
+
+    .contact .input[type="text"],
+    .contact .input[type="email"] {
+        flex-basis: 100%;
+    }
+
+
+    label[for="drop-nav"] {
+        display: block;
+        padding: 14px 20px;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 1.5em;
+        text-align: right;
+        cursor: pointer;
+    }
+
+    .nav ul {
+        display: none;
+    }
+
+    #drop-nav:checked + ul {
+        display: block;
+    }
+
+    .nav ul .nav-item {
+        display: block;
+        text-align: right;
+        margin: 0;
+    }
+}
