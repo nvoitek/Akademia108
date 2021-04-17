@@ -1,0 +1,22 @@
+#title {
+    font-weight: bold;
+}
+
+.pracownik,
+#tytul-pracownik {
+    width: 200px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+input[type="number"] {
+    width: 60px;
+    margin-right: 10px;
+}
+
+#tytul-czas,
+#tytul-stawka {
+    width: 68px;
+    display: inline-block;
+    margin-right: 10px;
+}
