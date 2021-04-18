@@ -1,0 +1,23 @@
+.container {
+    width: 216px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.full {
+    width: 208px;
+}
+
+.double {
+    width: 104px;
+}
+
+.single {
+    width: 50px;
+}
+
+.btn {
+    height: 50px;
+    margin: 2px;
+}
