@@ -19,7 +19,7 @@ obliczBtn.onclick = function() {
     for (let pracownik of pracownicy) {
         let czasPracy = pracownik.querySelector(".czas").value;
         
-        if (czasPracy < 160) {
+        if (czasPracy < 100) {
             pracownik.style.backgroundColor = "red";
         }
 
