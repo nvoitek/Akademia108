@@ -1,0 +1,28 @@
+body {
+  background-color: #66ccff;
+}
+
+h1 {
+  color: darkblue;
+}
+
+.App {
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.WarningMsg {
+  color: red;
+
+  font-size: 1.2em;
+
+  transition: all 0.3s;
+}
+
+.WarningMsg.hidden {
+  visibility: hidden;
+}
+
+.WarningMsg.visible {
+  visibility: visible;
+}
