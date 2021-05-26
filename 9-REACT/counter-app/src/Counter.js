@@ -29,7 +29,7 @@ function Counter() {
     return (
         <div className="Counter">
             <Display currentValue={currentValue}/>
-            <ButtonsPanel addBtnClickEvent={add} reinitBtnClickEvent={reinit} resetBtnClickEvent={reset}/>
+            <ButtonsPanel step={currentStep} addBtnClickEvent={add} reinitBtnClickEvent={reinit} resetBtnClickEvent={reset}/>
             <Step currentStep={currentStep} onStep={onStep}/>
         </div>
     );
