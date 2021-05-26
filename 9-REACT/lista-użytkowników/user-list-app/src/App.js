@@ -38,7 +38,7 @@ function App() {
           User's list
         </h1>
       </header>
-      <p className={isMsgVisible ? "WarningMsg visible" : "WarningMsg hidden"} >User {newUser} already exists</p>
+      <p className={"WarningMsg" + (isMsgVisible ? " visible" : " hidden")} >User {newUser} already exists</p>
       <AddUser userName={newUser} onUserNameChanged={onChange} onAddUser={onAdd}/>
       <UserList users={users} onUserDeleted={onDelete}/>
     </div>

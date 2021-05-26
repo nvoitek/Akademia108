@@ -15,8 +15,6 @@ h1 {
   color: red;
 
   font-size: 1.2em;
-
-  transition: all 0.3s;
 }
 
 .WarningMsg.hidden {
