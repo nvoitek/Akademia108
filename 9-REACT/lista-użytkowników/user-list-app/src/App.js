@@ -7,7 +7,7 @@ function App() {
 
   const [newUser, setNewUser] = useState('');
   const [isMsgVisible, setIsMsgVisible] = useState(false);
-  const [users, setUsers] = useState(["Marek", "Józek", "Teresa"]);
+  const [users, setUsers] = useState({"timestamp1" : {name: "Marek", age: 18}, "timestamp2" : {name: "Józek", age: 19}, "timestamp3" : {name: "Teresa", age: 23}});
 
   const onChange = (e) => {
     setIsMsgVisible(false);
@@ -26,7 +26,7 @@ function App() {
 
   const onDelete = (user) => {
     return function() {
-      let newList = users.filter(item => item !== user);
+      let newList = delete users[user];
       setUsers(newList);
     }
   }
