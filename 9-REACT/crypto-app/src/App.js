@@ -1,18 +1,41 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import CryptoRates from './CryptoRates';
 
 function App() {
 
   const [cryptoRates, setCryptoRates] = useState([]);
+  const [filteredCryptoRates, setFilteredCryptoRates] = useState([]);
   const [filter, setFilter] = useState('');
 
+  useEffect(() => {
+    //getCryptoRates();
+    let intervalId = setInterval(() => getCryptoRates(), 5000);
+
+    return function cleanup() {
+     console.log(`Clean Interval - ${Date.now()}`);
+     clearInterval(intervalId);
+    }
+  }, [cryptoRates, filter]);
+
   const onFilterChange = (e) => {
-    setFilter(e.target.value);
+    let newFilter = e.target.value;
+
+    filterCryptoRates(newFilter);
   }
 
-  const onRefreshClick = () => {
+  const filterCryptoRates = (currentFilter) => {
+    setFilter(currentFilter);
+
+    let newFilteredCryptoRates = cryptoRates.filter(x => x.currency.includes(currentFilter.trim().toUpperCase()));
+
+    setFilteredCryptoRates(newFilteredCryptoRates);
+  };
+
+  const getCryptoRates = () => {
+    console.log(`Get Data - ${Date.now()}`);
+
     axios.get('https://blockchain.info/pl/ticker')
       .then(res => {
         const tickers = res.data;
@@ -50,6 +73,7 @@ function App() {
         }
 
         setCryptoRates(newCryptoRates);
+        filterCryptoRates(filter);
       });
   }
 
@@ -58,9 +82,9 @@ function App() {
       <header className="App-header">
         <h1>Crypto Rate</h1>
       </header>
-      <button onClick={onRefreshClick}>Refresh</button>
+      {/* <button onClick={onRefreshClick}>Refresh</button> */}
       <input type="text" placeholder="filter" value={filter} onChange={onFilterChange} />
-      <CryptoRates cryptoRates={cryptoRates} />
+      <CryptoRates cryptoRates={filteredCryptoRates} />
     </div>
   );
 }
