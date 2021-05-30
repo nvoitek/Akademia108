@@ -1,0 +1,9 @@
+.Login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Login-form input {
+    margin: 10px;
+}
