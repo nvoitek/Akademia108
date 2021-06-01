@@ -10,7 +10,11 @@ function App() {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    //getCryptoRates();
+    console.log(`Use Effect - ${Date.now()}`);
+    getCryptoRates();
+  }, []);
+
+  useEffect(() => {
     let intervalId = setInterval(() => getCryptoRates(), 5000);
 
     return function cleanup() {
@@ -22,13 +26,13 @@ function App() {
   const onFilterChange = (e) => {
     let newFilter = e.target.value;
 
-    filterCryptoRates(newFilter);
+    filterCryptoRates(cryptoRates, newFilter);
   }
 
-  const filterCryptoRates = (currentFilter) => {
+  const filterCryptoRates = (newCryptoRates, currentFilter) => {
     setFilter(currentFilter);
 
-    let newFilteredCryptoRates = cryptoRates.filter(x => x.currency.includes(currentFilter.trim().toUpperCase()));
+    let newFilteredCryptoRates = newCryptoRates.filter(x => x.currency.includes(currentFilter.trim().toUpperCase()));
 
     setFilteredCryptoRates(newFilteredCryptoRates);
   };
@@ -73,7 +77,7 @@ function App() {
         }
 
         setCryptoRates(newCryptoRates);
-        filterCryptoRates(filter);
+        filterCryptoRates(newCryptoRates, filter);
       });
   }
 
