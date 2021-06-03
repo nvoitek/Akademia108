@@ -7,7 +7,6 @@ import {
   Link
 } from "react-router-dom";
 import Feed from './Feed';
-import Login from './Login';
 import Signup from './Signup';
 
 function App() {
@@ -42,7 +41,7 @@ function App() {
           </Route>
           <Route path="/login">
             <div>
-              <Login />
+              <Signup type='login' />
             </div>
           </Route>
           <Route path="/signup">

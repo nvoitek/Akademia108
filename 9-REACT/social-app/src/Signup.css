@@ -7,3 +7,19 @@
 .Signup-form input {
     margin: 10px;
 }
+
+.Signup-form .hidden {
+    display: none;
+}
+
+.Signup-form .visible {
+    display: block;
+}
+
+.Signup-form .error {
+    color: red;
+}
+
+.Signup-form .info {
+    color: green;
+}
