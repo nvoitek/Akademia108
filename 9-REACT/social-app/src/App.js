@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Feed from './Feed';
 import Signup from './Signup';
+import axios from 'axios';
 
 function App() {
 
@@ -24,7 +25,33 @@ function App() {
   }, []);
 
   const showLoginPopup = () => {
-    setIsPopupVisible(true);
+    if (localStorage === null) {
+      setIsPopupVisible(true);
+    }
+  };
+
+  const Logout = () => {
+    if (localStorage !== null) {
+      let axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
+        }
+      };
+
+      axios.post(
+          'https://akademia108.pl/api/social-app/user/logout', 
+          '', 
+          axiosConfig)
+      .then((res) => {
+          console.log("RESPONSE RECEIVED: ", res);
+          localStorage.clear();
+      })
+      .catch((err) => {
+          console.log("AXIOS ERROR: ", err);
+      })
+    }
   };
 
   return (
@@ -39,6 +66,9 @@ function App() {
           </li>
           <li>
             <Link to="/signup">SignUp</Link>
+          </li>
+          <li>
+            <Link to="/login" onClick={Logout}>Logout</Link>
           </li>
         </ul>
 

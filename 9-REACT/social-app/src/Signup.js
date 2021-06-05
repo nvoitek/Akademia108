@@ -1,5 +1,6 @@
 import './Signup.css';
 import {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 function Signup(props) {
@@ -15,6 +16,8 @@ function Signup(props) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isConfirmPasswordEmpty, setIsConfirmPasswordEmpty] = useState(false);
     const [doPasswordMatch, setDoPasswordMatch] = useState(false);
+
+    const history = useHistory();
 
     const onUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -142,6 +145,8 @@ function Signup(props) {
             localStorage.setItem('jwt_token', res.data.jwt_token);
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('ttl', res.data.ttl);
+
+            history.push("/");
         })
         .catch((err) => {
             console.log("AXIOS ERROR: ", err);
