@@ -146,6 +146,8 @@ function Signup(props) {
             localStorage.setItem('username', res.data.username);
             localStorage.setItem('ttl', res.data.ttl);
 
+            props.onLogin();
+
             history.push("/");
         })
         .catch((err) => {

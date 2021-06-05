@@ -1,5 +1,5 @@
 import './App.css';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +12,7 @@ import axios from 'axios';
 
 function App() {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [posts, setPosts] = useState(["Post1", "Post2", "Post3", "Post4", "Post5"]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
@@ -25,13 +26,13 @@ function App() {
   }, []);
 
   const showLoginPopup = () => {
-    if (localStorage === null) {
+    if (!isLoggedIn) {
       setIsPopupVisible(true);
     }
   };
 
   const Logout = () => {
-    if (localStorage !== null) {
+    if (isLoggedIn) {
       let axiosConfig = {
         headers: {
           'Content-Type': 'application/json',
@@ -41,36 +42,52 @@ function App() {
       };
 
       axios.post(
-          'https://akademia108.pl/api/social-app/user/logout', 
-          '', 
-          axiosConfig)
-      .then((res) => {
+        'https://akademia108.pl/api/social-app/user/logout',
+        '',
+        axiosConfig)
+        .then((res) => {
           console.log("RESPONSE RECEIVED: ", res);
+          setIsLoggedIn(false);
           localStorage.clear();
-      })
-      .catch((err) => {
+        })
+        .catch((err) => {
           console.log("AXIOS ERROR: ", err);
-      })
+        })
     }
   };
+
+  const Login = () => {
+    setIsPopupVisible(false);
+    setIsLoggedIn(true);
+  }
 
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">SignUp</Link>
-          </li>
-          <li>
-            <Link to="/login" onClick={Logout}>Logout</Link>
-          </li>
-        </ul>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            {
+              (!isLoggedIn ?
+                <>
+                  <li>
+                    <Link to="/signup">SignUp</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">Login</Link>
+                  </li>
+                </>
+                :
+                <>
+                  <li>
+                    <Link to="/login" onClick={Logout}>Logout</Link>
+                  </li>
+                </>)
+            }
+          </ul>
+        </nav>
 
         <hr />
 
@@ -82,13 +99,13 @@ function App() {
               </header>
               <Feed posts={posts} />
               <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
-                <Signup type='login' />
+                <Signup type='login' onLogin={Login}/>
               </div>
             </div>
           </Route>
           <Route path="/login">
             <div>
-              <Signup type='login' />
+              <Signup type='login' onLogin={Login}/>
             </div>
           </Route>
           <Route path="/signup">
