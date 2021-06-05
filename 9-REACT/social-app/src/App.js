@@ -1,5 +1,5 @@
 import './App.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +12,20 @@ import Signup from './Signup';
 function App() {
 
   const [posts, setPosts] = useState(["Post1", "Post2", "Post3", "Post4", "Post5"]);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  useEffect(() => {
+    let intervalId = setInterval(() => showLoginPopup(), 10000);
+
+    return function cleanup() {
+      console.log(`Clean Interval - ${Date.now()}`);
+      clearInterval(intervalId);
+    }
+  }, []);
+
+  const showLoginPopup = () => {
+    setIsPopupVisible(true);
+  };
 
   return (
     <Router>
@@ -37,6 +51,9 @@ function App() {
                 <h1>BearLy Social App</h1>
               </header>
               <Feed posts={posts} />
+              <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
+                <Signup type='login' />
+              </div>
             </div>
           </Route>
           <Route path="/login">

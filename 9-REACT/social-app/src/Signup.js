@@ -138,6 +138,10 @@ function Signup(props) {
             setEmail('');
             setPassword('');
             setConfirmPassword('');
+
+            localStorage.setItem('jwt_token', res.data.jwt_token);
+            localStorage.setItem('username', res.data.username);
+            localStorage.setItem('ttl', res.data.ttl);
         })
         .catch((err) => {
             console.log("AXIOS ERROR: ", err);
