@@ -1,4 +1,23 @@
-.Post img {
+.Post {
+    margin: 10px;
+}
+
+.Post q {
+    font-style: italic;
+}
+
+.Post .LowerRow {
+    display: flex;
+    align-items: center;
+}
+
+.Post .LowerRow p,
+.Post .LowerRow img,
+.Post .LowerRow .Icon {
+    margin: 15px;
+}
+
+.Post .LowerRow img {
     width: 25px;
     height: 25px;
 }
