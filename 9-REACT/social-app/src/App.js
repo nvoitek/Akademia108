@@ -99,7 +99,7 @@ function App() {
     <Router>
       <div>
         <nav>
-          <ul>
+          <ul className="NavMenu">
             <li>
               <Link to="/">Home</Link>
             </li>

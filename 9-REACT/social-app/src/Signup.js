@@ -2,6 +2,7 @@ import './Signup.css';
 import {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+import Button from './styled-components/Button'
 
 function Signup(props) {
 
@@ -179,7 +180,7 @@ function Signup(props) {
             </>
             ) : ''}
 
-            <input type="submit" value="Submit"/>
+            <Button>Submit</Button>
         </form>
     );
 }
