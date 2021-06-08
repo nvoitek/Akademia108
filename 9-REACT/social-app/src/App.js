@@ -16,8 +16,16 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
+  const axiosConfig = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('jwt_token') ? localStorage.getItem('jwt_token') : ''
+    }
+  };
+
   useEffect(() => {
-    GetPosts();
+    getPosts();
     let intervalId = setInterval(() => showLoginPopup(), 10000);
 
     return function cleanup() {
@@ -32,16 +40,8 @@ function App() {
     }
   };
 
-  const Logout = () => {
+  const logout = () => {
     if (isLoggedIn) {
-      let axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
-        }
-      };
-
       axios.post(
         'https://akademia108.pl/api/social-app/user/logout',
         '',
@@ -57,30 +57,13 @@ function App() {
     }
   };
 
-  const Login = () => {
+  const login = () => {
     setIsPopupVisible(false);
     setIsLoggedIn(true);
   }
 
-  const GetPosts = () => {
+  const getPosts = () => {
     let axiosConfig;
-
-    if (isLoggedIn) {
-      axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('jwt_token')
-        }
-      };
-    } else {
-      axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      };
-    }
 
     axios.post(
       'https://akademia108.pl/api/social-app/post/latest',
@@ -116,7 +99,7 @@ function App() {
                 :
                 <>
                   <li>
-                    <Link to="/login" onClick={Logout}>Logout</Link>
+                    <Link to="/login" onClick={logout}>Logout</Link>
                   </li>
                 </>)
             }
@@ -131,16 +114,16 @@ function App() {
               <header className="App-header">
                 <h1>BearLy Social App</h1>
               </header>
-              <button onClick={GetPosts}>Get Posts</button>
+              <button onClick={getPosts}>Get Posts</button>
               <Feed posts={posts} />
               <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
-                <Signup type='login' onLogin={Login}/>
+                <Signup type='login' onLogin={login}/>
               </div>
             </div>
           </Route>
           <Route path="/login">
             <div>
-              <Signup type='login' onLogin={Login}/>
+              <Signup type='login' onLogin={login}/>
             </div>
           </Route>
           <Route path="/signup">

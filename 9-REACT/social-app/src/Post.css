@@ -2,11 +2,15 @@
     margin: 10px;
 }
 
-.Post p {
+.Post .User {
     font-weight: 600;
 }
 
-.Post q {
+.Post .Date {
+    color: gray;
+}
+
+.Post .Content {
     font-style: italic;
 }
 

@@ -1,6 +1,6 @@
 import './Signup.css';
 import {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {Redirect, useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Button from './styled-components/Button'
 
@@ -10,6 +10,7 @@ function Signup(props) {
     const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
     const [submitMsg, setSubmitMsg] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [hasErrors, setHasErrors] = useState(false);
     const [email, setEmail] = useState('');
     const [isEmailEmpty, setIsEmailEmpty] = useState(false);
     const [password, setPassword] = useState('');
@@ -17,6 +18,13 @@ function Signup(props) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isConfirmPasswordEmpty, setIsConfirmPasswordEmpty] = useState(false);
     const [doPasswordMatch, setDoPasswordMatch] = useState(false);
+        
+    const axiosConfig = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    };
 
     const history = useHistory();
 
@@ -77,25 +85,18 @@ function Signup(props) {
 
         if (ok) {
             if (props.type !== 'login') {
-                Signup(username, email, password);
+                signup(username, email, password);
             } else {
-                Login(username, password);
+                login(username, password);
             }
         }
     };
 
-    const Signup = (username, email, password) => {
+    const signup = (username, email, password) => {
         let postData = {
             username: username,
             email : email,
             password: password
-        };
-        
-        let axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
         };
 
         axios.post(
@@ -104,30 +105,29 @@ function Signup(props) {
             axiosConfig)
         .then((res) => {
             console.log("RESPONSE RECEIVED: ", res);
-            setSubmitMsg(`${username} created`);
-            setIsSubmitted(true);
-            setUsername('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
+
+            if (res.data.signedup) {
+                setSubmitMsg(`${username} created`);
+                setIsSubmitted(true);
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+            } else {
+                setSubmitMsg(`${username} or ${email} already has an account`);
+                setHasErrors(true);
+            }
         })
         .catch((err) => {
             console.log("AXIOS ERROR: ", err);
         })
     };
 
-    const Login = (username, password) => {
+    const login = (username, password) => {
         let postData = {
             username: username,
             password: password,
             ttl: 3600
-        };
-        
-        let axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
         };
 
         axios.post(
@@ -159,6 +159,7 @@ function Signup(props) {
     return (
         <form className="Signup-form" onSubmit={onSignup}>
             <p className={"info " + (isSubmitted ? "visible" : "hidden")}>{submitMsg}</p>
+            <p className={"error " + (hasErrors ? "visible" : "hidden")}>{submitMsg}</p>
             <p className={"error " + (isUsernameEmpty ? "visible" : "hidden")}>Username can't be empty</p>
             <input type="text" placeholder="username" value={username} onChange={onUsernameChange}/>
 

@@ -8,8 +8,8 @@ function Post(props) {
             <div className="Row">
                 <img src={props.avatar_url} alt={"avatar of " + props.username}></img>
                 <div>
-                    <p>{props.username}</p>
-                    <q>{props.content}</q>
+                    <p className="User">{props.username} <span className="Date">{props.created_at}</span></p>
+                    <p className="Content">{props.content}</p>
                 </div>
             </div>
             <div className="Row">
