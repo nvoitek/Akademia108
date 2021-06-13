@@ -1,5 +1,5 @@
 .Post {
-    margin: 10px;
+    border-top: 1px solid grey;
 }
 
 .Post .User {
@@ -27,13 +27,4 @@
 
 .Post .Row img {
     width: 80px;
-}
-
-.Icon {
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.Icon:hover {
-    color: orange;
 }

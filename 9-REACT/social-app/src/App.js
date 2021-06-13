@@ -9,6 +9,8 @@ import {
 import Feed from './Feed';
 import Signup from './Signup';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMugHot } from '@fortawesome/free-solid-svg-icons'
 
 function App() {
 
@@ -80,9 +82,12 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className="Container">
         <nav>
           <ul className="NavMenu">
+            <li>
+              <Link to="/"><FontAwesomeIcon className="Icon" icon={faMugHot} /></Link>
+            </li>
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -106,15 +111,12 @@ function App() {
           </ul>
         </nav>
 
-        <hr />
-
         <Switch>
           <Route exact path="/">
-            <div>
+            <div className="App">
               <header className="App-header">
-                <h1>BearLy Social App</h1>
+                <h1>Coffee Break</h1>
               </header>
-              <button onClick={getPosts}>Get Posts</button>
               <Feed posts={posts} />
               <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
                 <Signup type='login' onLogin={login}/>
@@ -122,13 +124,23 @@ function App() {
             </div>
           </Route>
           <Route path="/login">
-            <div>
-              <Signup type='login' onLogin={login}/>
+            <div className="App">
+              <header className="App-header">
+                <h1>Coffee Break</h1>
+              </header>
+              <div className="Form-container">
+                <Signup type='login' onLogin={login}/>
+              </div>
             </div>
           </Route>
           <Route path="/signup">
-            <div>
-              <Signup />
+            <div className="App">
+              <header className="App-header">
+                <h1>Coffee Break</h1>
+              </header>
+              <div className="Form-container">
+                <Signup />
+              </div>
             </div>
           </Route>
         </Switch>

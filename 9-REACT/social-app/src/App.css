@@ -1,11 +1,17 @@
+.App {
+  border-left: 1px solid grey;
+  width: 100%;
+}
+
 .App-header {
   background-color: black;
 }
 
 .App-header h1 {
-  margin: 15px;
-  padding: 15px;
+  margin: 0 15px 0 15px;
+  padding: 20px;
   color: white;
+  font-size: 3.5em;
 }
 
 .popup {
@@ -26,15 +32,49 @@
 
 .NavMenu {
   list-style-type: none;
+  text-align: center;
   padding: 0;
   margin: 0;
 }
 
-.NavMenu a {
+.NavMenu li {
   margin: 15px;
+}
+
+.NavMenu a {
   text-decoration: none;
+  color: black;
+  font-size: 2em;
+  font-weight: 800;
+  transition: all 0.3s;
+}
+
+.NavMenu a:hover {
+  color: orange;
 }
 
 button {
   margin: 25px;
+}
+
+.Container {
+  display: flex;
+}
+
+.Icon {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.NavMenu li .Icon {
+  font-size: 2.25em;
+}
+
+.Icon:hover {
+    color: orange;
+}
+
+.Form-container {
+  margin: 15px;
+  padding: 15px;
 }
