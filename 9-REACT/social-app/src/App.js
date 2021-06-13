@@ -124,7 +124,7 @@ function App() {
             </div>
           </Route>
           <Route path="/login">
-            <div className="App">
+            <div className="App Small">
               <header className="App-header">
                 <h1>Coffee Break</h1>
               </header>
@@ -134,7 +134,7 @@ function App() {
             </div>
           </Route>
           <Route path="/signup">
-            <div className="App">
+            <div className="App Small">
               <header className="App-header">
                 <h1>Coffee Break</h1>
               </header>
