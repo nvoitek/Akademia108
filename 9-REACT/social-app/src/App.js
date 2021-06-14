@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Feed from './Feed';
 import Signup from './Signup';
+import Login from './Login';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMugHot } from '@fortawesome/free-solid-svg-icons'
@@ -111,36 +112,28 @@ function App() {
           </ul>
         </nav>
 
+
+        <div className="App">
+          <header className="App-header">
+            <h1>Coffee Break</h1>
+          </header>
+        </div>
+
         <Switch>
           <Route exact path="/">
-            <div className="App">
-              <header className="App-header">
-                <h1>Coffee Break</h1>
-              </header>
-              <Feed posts={posts} />
-              <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
-                <Signup type='login' onLogin={login}/>
-              </div>
+            <Feed posts={posts} />
+            <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
+              <Login onLogin={login} />
             </div>
           </Route>
           <Route path="/login">
-            <div className="App Small">
-              <header className="App-header">
-                <h1>Coffee Break</h1>
-              </header>
-              <div className="Form-container">
-                <Signup type='login' onLogin={login}/>
-              </div>
+            <div className="Form-container">
+              <Login onLogin={login} />
             </div>
           </Route>
           <Route path="/signup">
-            <div className="App Small">
-              <header className="App-header">
-                <h1>Coffee Break</h1>
-              </header>
-              <div className="Form-container">
-                <Signup />
-              </div>
+            <div className="Form-container">
+              <Signup />
             </div>
           </Route>
         </Switch>

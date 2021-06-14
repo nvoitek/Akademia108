@@ -1,21 +1,24 @@
 import './Signup.css';
 import {useState} from 'react';
-import {Redirect, useHistory} from 'react-router-dom';
 import axios from 'axios';
-import Button from './styled-components/Button'
+import Button from './styled-components/Button';
+import styled from 'styled-components';
 
-function Signup(props) {
+function Signup() {
 
-    const [username, setUsername] = useState('');
+    const [signupData, setSignupData] = useState({username : '', email : '', password : '', confirmPassword : ''});
+
+    const [validationData, setValidationData] = useState({hasErrors : false, isSubmitted : false, isUsernameEmpty : false, isEmailEmpty : false, isPasswordEmpty : false, isConfirmPasswordEmpty : false, doPasswordMatch : false});
+
     const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
     const [submitMsg, setSubmitMsg] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [hasErrors, setHasErrors] = useState(false);
-    const [email, setEmail] = useState('');
+    
     const [isEmailEmpty, setIsEmailEmpty] = useState(false);
-    const [password, setPassword] = useState('');
+    
     const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
-    const [confirmPassword, setConfirmPassword] = useState('');
+    
     const [isConfirmPasswordEmpty, setIsConfirmPasswordEmpty] = useState(false);
     const [doPasswordMatch, setDoPasswordMatch] = useState(false);
         
@@ -25,78 +28,78 @@ function Signup(props) {
             'Accept': 'application/json'
         }
     };
-
-    const history = useHistory();
-
+ 
     const onUsernameChange = (e) => {
-        setUsername(e.target.value);
+        setSignupData(prevState => ({
+            ...prevState,
+            username : e.target.value
+        }));
     };
 
     const onEmailChange = (e) => {
-        setEmail(e.target.value);
+        setSignupData(prevState => ({
+            ...prevState,
+            email : e.target.value
+        }));
     };
 
     const onPasswordChange = (e) => {
-        setPassword(e.target.value);
+        setSignupData(prevState => ({
+            ...prevState,
+            password : e.target.value
+        }));
     }
 
     const onConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
+        setSignupData(prevState => ({
+            ...prevState,
+            confirmPassword : e.target.value
+        }));
     }
 
     const onSignup = (e) => {
         e.preventDefault();
         let ok = true;
 
-        if (!username) {
-            ok = false;
-            setIsUsernameEmpty(true);
-        } else {
-            setIsUsernameEmpty(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            isUsernameEmpty : !signupData.username
+        }));
 
-        if (props.type !== 'login' && !email) {
-            ok = false;
-            setIsEmailEmpty(true);
-        } else {
-            setIsEmailEmpty(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            isEmailEmpty : !signupData.email
+        }));
 
-        if (!password) {
-            ok = false;
-            setIsPasswordEmpty(true);
-        } else {
-            setIsPasswordEmpty(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            isPasswordEmpty : !signupData.password
+        }));
 
-        if (props.type !== 'login' && !confirmPassword) {
-            ok = false;
-            setIsConfirmPasswordEmpty(true);
-        } else {
-            setIsConfirmPasswordEmpty(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            isConfirmPasswordEmpty : !signupData.confirmPassword
+        }));
 
-        if (props.type !== 'login' && password !== confirmPassword) {
-            ok = false;
-            setDoPasswordMatch(true);
-        } else {
-            setDoPasswordMatch(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            doPasswordMatch : signupData.password !== signupData.confirmPassword
+        }));
 
-        if (ok) {
-            if (props.type !== 'login') {
-                signup(username, email, password);
-            } else {
-                login(username, password);
+        if (signupData.username 
+            && signupData.email
+            && signupData.password 
+            && signupData.confirmPassword
+            && signupData.password === signupData.confirmPassword) {
+                signup(signupData);
             }
-        }
     };
 
-    const signup = (username, email, password) => {
+    const signup = (signupData) => {
         let postData = {
-            username: username,
-            email : email,
-            password: password
+            username: signupData.username,
+            email : signupData.email,
+            password: signupData.password
         };
 
         axios.post(
@@ -107,15 +110,20 @@ function Signup(props) {
             console.log("RESPONSE RECEIVED: ", res);
 
             if (res.data.signedup) {
-                setSubmitMsg(`${username} created`);
-                setIsSubmitted(true);
-                setUsername('');
-                setEmail('');
-                setPassword('');
-                setConfirmPassword('');
+
+                setValidationData(prevState => ({
+                    ...prevState,
+                    submitMsg : `${signupData.username} created`,
+                    isSubmitted : true
+                }));
+                setSignupData({username : '', email : '', password : '', confirmPassword : ''});
             } else {
-                setSubmitMsg(`${username} or ${email} already has an account`);
-                setHasErrors(true);
+
+                setValidationData(prevState => ({
+                    ...prevState,
+                    submitMsg : `${signupData.username} or ${signupData.email} already has an account`,
+                    hasErrors : true
+                }));
             }
         })
         .catch((err) => {
@@ -123,67 +131,47 @@ function Signup(props) {
         })
     };
 
-    const login = (username, password) => {
-        let postData = {
-            username: username,
-            password: password,
-            ttl: 3600
-        };
-
-        axios.post(
-            'https://akademia108.pl/api/social-app/user/login', 
-            postData, 
-            axiosConfig)
-        .then((res) => {
-            console.log("RESPONSE RECEIVED: ", res);
-            setSubmitMsg(`${username} logged in`);
-            setIsSubmitted(true);
-            setUsername('');
-            setEmail('');
-            setPassword('');
-            setConfirmPassword('');
-
-            localStorage.setItem('jwt_token', res.data.jwt_token);
-            localStorage.setItem('username', res.data.username);
-            localStorage.setItem('ttl', res.data.ttl);
-
-            props.onLogin();
-
-            history.push("/");
-        })
-        .catch((err) => {
-            console.log("AXIOS ERROR: ", err);
-        })
-    };
-
     return (
-        <form className="Signup-form" onSubmit={onSignup}>
-            <p className={"info " + (isSubmitted ? "visible" : "hidden")}>{submitMsg}</p>
-            <p className={"error " + (hasErrors ? "visible" : "hidden")}>{submitMsg}</p>
-            <p className={"error " + (isUsernameEmpty ? "visible" : "hidden")}>Username can't be empty</p>
-            <input type="text" placeholder="username" value={username} onChange={onUsernameChange}/>
+        <SignupForm className="Signup-form" onSubmit={onSignup}>
+            <InfoParagraph visible={validationData.isSubmitted}>{validationData.submitMsg}</InfoParagraph>
+            <ErrorParagraph visible={validationData.hasErrors}>{validationData.submitMsg}</ErrorParagraph>
+            <ErrorParagraph visible={validationData.isUsernameEmpty}>Username can't be empty</ErrorParagraph>
+            <Input type="text" placeholder="username" value={signupData.username} onChange={onUsernameChange}/>
 
-            {(props.type !== 'login') ? (
-            <>
-                <p className={"error " + (isEmailEmpty ? "visible" : "hidden")}>Email can't be empty</p>
-                <input type="email" placeholder="email" value={email} onChange={onEmailChange}/>
-            </>
-            ) : ''}
+            <ErrorParagraph visible={validationData.isEmailEmpty}>Email can't be empty</ErrorParagraph>
+            <Input type="email" placeholder="email" value={signupData.email} onChange={onEmailChange}/>
 
-            <p className={"error " + (isPasswordEmpty ? "visible" : "hidden")}>Password can't be empty</p>
-            <input type="password" placeholder="password" value={password} onChange={onPasswordChange}/>
+            <ErrorParagraph visible={validationData.isPasswordEmpty}>Password can't be empty</ErrorParagraph>
+            <Input type="password" placeholder="password" value={signupData.password} onChange={onPasswordChange}/>
 
-            {(props.type !== 'login') ? (
-            <>
-                <p className={"error " + (isConfirmPasswordEmpty ? "visible" : "hidden")}>Password can't be empty</p>
-                <p className={"error " + (doPasswordMatch ? "visible" : "hidden")}>Passwords don't match</p>
-                <input type="password" placeholder="confirm password" value={confirmPassword} onChange={onConfirmPasswordChange}/>
-            </>
-            ) : ''}
+            <ErrorParagraph visible={validationData.isConfirmPasswordEmpty}>Password can't be empty</ErrorParagraph>
+            <ErrorParagraph visible={validationData.doPasswordMatch}>Passwords don't match</ErrorParagraph>
+            <Input type="password" placeholder="confirm password" value={signupData.confirmPassword} onChange={onConfirmPasswordChange}/>
 
             <Button>Submit</Button>
-        </form>
+        </SignupForm>
     );
 }
+
+const SignupForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+`;
+
+const InfoParagraph = styled.p`
+    color: green;
+    display: ${props => (props.visible ? 'block' : 'none')};
+`;
+
+const ErrorParagraph = styled.p`
+    color: red;
+    display: ${props => (props.visible ? 'block' : 'none')};
+`;
+
+const Input = styled.input`
+    margin: 10px;
+`;
 
 export default Signup;
