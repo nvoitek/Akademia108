@@ -1,4 +1,3 @@
-import './Signup.css';
 import {useState} from 'react';
 import axios from 'axios';
 import Button from './styled-components/Button';
@@ -7,21 +6,8 @@ import styled from 'styled-components';
 function Signup() {
 
     const [signupData, setSignupData] = useState({username : '', email : '', password : '', confirmPassword : ''});
-
     const [validationData, setValidationData] = useState({hasErrors : false, isSubmitted : false, isUsernameEmpty : false, isEmailEmpty : false, isPasswordEmpty : false, isConfirmPasswordEmpty : false, doPasswordMatch : false});
 
-    const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
-    const [submitMsg, setSubmitMsg] = useState('');
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [hasErrors, setHasErrors] = useState(false);
-    
-    const [isEmailEmpty, setIsEmailEmpty] = useState(false);
-    
-    const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
-    
-    const [isConfirmPasswordEmpty, setIsConfirmPasswordEmpty] = useState(false);
-    const [doPasswordMatch, setDoPasswordMatch] = useState(false);
-        
     const axiosConfig = {
         headers: {
             'Content-Type': 'application/json',
@@ -59,7 +45,6 @@ function Signup() {
 
     const onSignup = (e) => {
         e.preventDefault();
-        let ok = true;
 
         setValidationData(prevState => ({
             ...prevState,
@@ -110,7 +95,6 @@ function Signup() {
             console.log("RESPONSE RECEIVED: ", res);
 
             if (res.data.signedup) {
-
                 setValidationData(prevState => ({
                     ...prevState,
                     submitMsg : `${signupData.username} created`,
@@ -132,26 +116,33 @@ function Signup() {
     };
 
     return (
-        <SignupForm className="Signup-form" onSubmit={onSignup}>
-            <InfoParagraph visible={validationData.isSubmitted}>{validationData.submitMsg}</InfoParagraph>
-            <ErrorParagraph visible={validationData.hasErrors}>{validationData.submitMsg}</ErrorParagraph>
-            <ErrorParagraph visible={validationData.isUsernameEmpty}>Username can't be empty</ErrorParagraph>
-            <Input type="text" placeholder="username" value={signupData.username} onChange={onUsernameChange}/>
+        <FormContainer>
+            <SignupForm className="Signup-form" onSubmit={onSignup}>
+                <InfoParagraph visible={validationData.isSubmitted}>{validationData.submitMsg}</InfoParagraph>
+                <ErrorParagraph visible={validationData.hasErrors}>{validationData.submitMsg}</ErrorParagraph>
+                <ErrorParagraph visible={validationData.isUsernameEmpty}>Username can't be empty</ErrorParagraph>
+                <Input type="text" placeholder="username" value={signupData.username} onChange={onUsernameChange}/>
 
-            <ErrorParagraph visible={validationData.isEmailEmpty}>Email can't be empty</ErrorParagraph>
-            <Input type="email" placeholder="email" value={signupData.email} onChange={onEmailChange}/>
+                <ErrorParagraph visible={validationData.isEmailEmpty}>Email can't be empty</ErrorParagraph>
+                <Input type="email" placeholder="email" value={signupData.email} onChange={onEmailChange}/>
 
-            <ErrorParagraph visible={validationData.isPasswordEmpty}>Password can't be empty</ErrorParagraph>
-            <Input type="password" placeholder="password" value={signupData.password} onChange={onPasswordChange}/>
+                <ErrorParagraph visible={validationData.isPasswordEmpty}>Password can't be empty</ErrorParagraph>
+                <Input type="password" placeholder="password" value={signupData.password} onChange={onPasswordChange}/>
 
-            <ErrorParagraph visible={validationData.isConfirmPasswordEmpty}>Password can't be empty</ErrorParagraph>
-            <ErrorParagraph visible={validationData.doPasswordMatch}>Passwords don't match</ErrorParagraph>
-            <Input type="password" placeholder="confirm password" value={signupData.confirmPassword} onChange={onConfirmPasswordChange}/>
+                <ErrorParagraph visible={validationData.isConfirmPasswordEmpty}>Password can't be empty</ErrorParagraph>
+                <ErrorParagraph visible={validationData.doPasswordMatch}>Passwords don't match</ErrorParagraph>
+                <Input type="password" placeholder="confirm password" value={signupData.confirmPassword} onChange={onConfirmPasswordChange}/>
 
-            <Button>Submit</Button>
-        </SignupForm>
+                <Button>Submit</Button>
+            </SignupForm>
+        </FormContainer>    
     );
 }
+
+const FormContainer = styled.div`
+    margin: 15px;
+    padding: 15px;
+`;
 
 const SignupForm = styled.form`
     display: flex;

@@ -2,16 +2,12 @@ import {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Button from './styled-components/Button';
+import styled from 'styled-components';
 
 function Login(props) {
 
-    const [username, setUsername] = useState('');
-    const [isUsernameEmpty, setIsUsernameEmpty] = useState(false);
-    const [submitMsg, setSubmitMsg] = useState('');
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [hasErrors, setHasErrors] = useState(false);
-    const [password, setPassword] = useState('');
-    const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+    const [loginData, setLoginData] = useState({username : '', password : ''});
+    const [validationData, setValidationData] = useState({hasErrors : false, isSubmitted : false, isUsernameEmpty : false, isPasswordEmpty : false});
     
     const axiosConfig = {
         headers: {
@@ -23,34 +19,36 @@ function Login(props) {
     const history = useHistory();
 
     const onUsernameChange = (e) => {
-        setUsername(e.target.value);
+        setLoginData(prevState => ({
+            ...prevState,
+            username : e.target.value
+        }));
     };
 
     const onPasswordChange = (e) => {
-        setPassword(e.target.value);
+        setLoginData(prevState => ({
+            ...prevState,
+            username : e.target.value
+        }));
     }
 
     const onLogin = (e) => {
         e.preventDefault();
-        let ok = true;
 
-        if (!username) {
-            ok = false;
-            setIsUsernameEmpty(true);
-        } else {
-            setIsUsernameEmpty(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            isUsernameEmpty : !loginData.username
+        }));
 
-        if (!password) {
-            ok = false;
-            setIsPasswordEmpty(true);
-        } else {
-            setIsPasswordEmpty(false);
-        }
+        setValidationData(prevState => ({
+            ...prevState,
+            isPasswordEmpty : !loginData.password
+        }));
 
-        if (ok) {
-            login(username, password);
-        }
+        if (loginData.username
+            && loginData.password) {
+                login(loginData);
+            }
     };
 
     const login = (loginData) => {
@@ -68,10 +66,12 @@ function Login(props) {
             console.log("RESPONSE RECEIVED: ", res);
 
             if (!res.data.error) {
-                setSubmitMsg(`${loginData.username} logged in`);
-                setIsSubmitted(true);
-                setUsername();
-                setPassword();
+                setValidationData(prevState => ({
+                    ...prevState,
+                    submitMsg : `${loginData.username} logged in`,
+                    isSubmitted : true
+                }));
+                setLoginData({username : '', password : ''});
     
                 localStorage.setItem('user_data', res.data);
 
@@ -79,30 +79,64 @@ function Login(props) {
     
                 history.push("/");
             } else {
-                setSubmitMsg('Unable to login');
-                setHasErrors(true);
+                setValidationData(prevState => ({
+                    ...prevState,
+                    submitMsg : 'Unable to login',
+                    hasErrors : true
+                }));
             }
         })
         .catch((err) => {
             console.log("AXIOS ERROR: ", err);
-            setSubmitMsg('Unable to login');
-            setHasErrors(true);
+            setValidationData(prevState => ({
+                ...prevState,
+                submitMsg : 'Unable to login',
+                hasErrors : true
+            }));
         });
     };
     
     return (
-        <form className="Signup-form" onSubmit={onLogin}>
-            <p className={"info " + (isSubmitted ? "visible" : "hidden")}>{submitMsg}</p>
-            <p className={"error " + (hasErrors ? "visible" : "hidden")}>{submitMsg}</p>
-            <p className={"error " + (isUsernameEmpty ? "visible" : "hidden")}>Username can't be empty</p>
-            <input type="text" placeholder="username" value={username} onChange={onUsernameChange}/>
+        <FormContainer>
+            <LoginForm className="Signup-form" onSubmit={onLogin}>
+                <InfoParagraph visible={validationData.isSubmitted}>{validationData.submitMsg}</InfoParagraph>
+                <ErrorParagraph visible={validationData.hasErrors}>{validationData.submitMsg}</ErrorParagraph>
+                <ErrorParagraph visible={validationData.isUsernameEmpty}>Username can't be empty</ErrorParagraph>
+                <Input type="text" placeholder="username" value={loginData.username} onChange={onUsernameChange}/>
 
-            <p className={"error " + (isPasswordEmpty ? "visible" : "hidden")}>Password can't be empty</p>
-            <input type="password" placeholder="password" value={password} onChange={onPasswordChange}/>
+                <ErrorParagraph visible={validationData.isPasswordEmpty}>Password can't be empty</ErrorParagraph>
+                <Input type="password" placeholder="password" value={loginData.password} onChange={onPasswordChange}/>
 
-            <Button>Submit</Button>
-        </form>
+                <Button>Submit</Button>
+            </LoginForm>
+        </FormContainer>
     );
 }
+
+const FormContainer = styled.div`
+    margin: 15px;
+    padding: 15px;
+`;
+
+const LoginForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+`;
+
+const InfoParagraph = styled.p`
+    color: green;
+    display: ${props => (props.visible ? 'block' : 'none')};
+`;
+
+const ErrorParagraph = styled.p`
+    color: red;
+    display: ${props => (props.visible ? 'block' : 'none')};
+`;
+
+const Input = styled.input`
+    margin: 10px;
+`;
 
 export default Login;

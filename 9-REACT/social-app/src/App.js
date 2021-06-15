@@ -1,4 +1,3 @@
-import './App.css';
 import { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
@@ -12,11 +11,11 @@ import Login from './Login';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMugHot } from '@fortawesome/free-solid-svg-icons'
+import styled from 'styled-components';
 
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [posts, setPosts] = useState([]);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const axiosConfig = {
@@ -28,7 +27,6 @@ function App() {
   };
 
   useEffect(() => {
-    getPosts();
     let intervalId = setInterval(() => showLoginPopup(), 10000);
 
     return function cleanup() {
@@ -65,81 +63,138 @@ function App() {
     setIsLoggedIn(true);
   }
 
-  const getPosts = () => {
-    let axiosConfig;
-
-    axios.post(
-      'https://akademia108.pl/api/social-app/post/latest',
-      '',
-      axiosConfig)
-      .then((res) => {
-        console.log("RESPONSE RECEIVED: ", res);
-        setPosts([...res.data]);
-      })
-      .catch((err) => {
-        console.log("AXIOS ERROR: ", err);
-      })
-  }
-
   return (
     <Router>
-      <div className="Container">
-        <nav>
-          <ul className="NavMenu">
-            <li>
+      <AppContainer>
+        <NavMenu>
+          <NavList>
+            <NavListItem>
               <Link to="/"><FontAwesomeIcon className="Icon" icon={faMugHot} /></Link>
-            </li>
-            <li>
+            </NavListItem>
+            <NavListItem>
               <Link to="/">Home</Link>
-            </li>
+            </NavListItem>
             {
               (!isLoggedIn ?
                 <>
-                  <li>
+                  <NavListItem>
                     <Link to="/signup">SignUp</Link>
-                  </li>
-                  <li>
+                  </NavListItem>
+                  <NavListItem>
                     <Link to="/login">Login</Link>
-                  </li>
+                  </NavListItem>
                 </>
                 :
                 <>
-                  <li>
+                  <NavListItem>
                     <Link to="/login" onClick={logout}>Logout</Link>
-                  </li>
+                  </NavListItem>
                 </>)
             }
-          </ul>
-        </nav>
+          </NavList>
+        </NavMenu>
 
+        <ContentContainer>
+          <HeaderContainer>
+            <Heading1>Coffee Break</Heading1>
+          </HeaderContainer>
 
-        <div className="App">
-          <header className="App-header">
-            <h1>Coffee Break</h1>
-          </header>
-        </div>
-
-        <Switch>
-          <Route exact path="/">
-            <Feed posts={posts} />
-            <div className={"popup " + (isPopupVisible ? "visible" : "hidden")}>
-              <Login onLogin={login} />
-            </div>
-          </Route>
-          <Route path="/login">
-            <div className="Form-container">
-              <Login onLogin={login} />
-            </div>
-          </Route>
-          <Route path="/signup">
-            <div className="Form-container">
-              <Signup />
-            </div>
-          </Route>
-        </Switch>
-      </div>
+          <Switch>
+            <Route exact path="/">
+              <Feed />
+              <Popup visible={isPopupVisible}>
+                <Login onLogin={login} />
+              </Popup>
+            </Route>
+            <Route path="/login">
+                <Login onLogin={login} />
+            </Route>
+            <Route path="/signup">
+                <Signup />
+            </Route>
+          </Switch>
+        </ContentContainer>
+      </AppContainer>
     </Router>
   );
 }
+
+const AppContainer = styled.div`
+
+`;
+
+const ContentContainer = styled.div`
+  margin-left: 200px;
+`;
+
+const HeaderContainer = styled.header`
+  background-color: black;
+`;
+
+const Heading1 = styled.h1`
+  margin: 0 15px 0 15px;
+  padding: 20px;
+  color: white;
+  font-size: 3.5em;
+`;
+
+const NavMenu = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  min-height: 100vh;
+  min-width: 200px;
+  border-right: solid 1px grey;
+`;
+
+const NavList = styled.ul`
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  .Icon {
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 2.25em;
+  }
+
+  .Icon:hover {
+    color: orange;
+  }
+`;
+
+const NavListItem = styled.li`
+  margin: 15px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: 2em;
+    font-weight: 800;
+    transition: all 0.3s;s
+  }
+
+  a:hover {
+    color: orange;
+  }
+`;
+
+const Popup = styled.div`
+  background-color: white;
+  border: 1px solid black;
+  position: fixed;
+  left: 45%;
+  height: 250px;
+  width: 300px;
+  transition: all 1s;
+
+  ${props => (props.visible ? 
+      'bottom: 0px;'
+    :
+      'bottom: -250px;'
+    )}
+`;
 
 export default App;
