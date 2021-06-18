@@ -1,4 +1,5 @@
 import Post from './Post';
+import NewPost from './NewPost';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -32,13 +33,17 @@ function Feed() {
     }
 
     return (
-        <div>
+        <>
+            {(isLoggedIn ? <NewPost /> : '')}
             {
                 posts.map((item) => {
                     return <Post key={item.id} post={item} />
                 })
             }
-        </div>
+            <Popup visible={!isLoggedIn && isPopupVisible}>
+              <Login onLogin={login} />
+            </Popup>
+        </>
     );
 }
 

@@ -5,7 +5,6 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import NewPost from './NewPost';
 import Feed from './Feed';
 import Signup from './Signup';
 import Login from './Login';
@@ -102,11 +101,7 @@ function App() {
 
           <Switch>
             <Route exact path="/">
-              {(isLoggedIn ? <NewPost /> : '')}
-              <Feed />
-              <Popup visible={!isLoggedIn && isPopupVisible}>
-                <Login onLogin={login} />
-              </Popup>
+              <Feed isLoggedIn={isLoggedIn}/>
             </Route>
             <Route path="/login">
               <Login onLogin={login} />
