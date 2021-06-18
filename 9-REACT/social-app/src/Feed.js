@@ -35,7 +35,7 @@ function Feed() {
         <div>
             {
                 posts.map((item) => {
-                    return <Post key={item.id} content={item.content} username={item.user.username} avatar_url={item.user.avatar_url} created_at={item.created_at} />
+                    return <Post key={item.id} post={item} />
                 })
             }
         </div>

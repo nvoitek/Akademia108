@@ -16,7 +16,7 @@ import styled from 'styled-components';
 
 function App() {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('user_data') !== null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const axiosConfig = {
