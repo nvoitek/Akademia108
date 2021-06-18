@@ -4,12 +4,15 @@ import styled from 'styled-components';
 import ReactTimeAgo from 'react-time-ago'
 
 function Post(props) {
+
+    const date = new Date(props.created_at);
+
     return (
         <PostContainer className="Post">
             <Row className="Row">
                 <Image src={props.avatar_url} alt={"avatar of " + props.username}></Image>
                 <div>
-                    <PostHeader className="User">{props.username} <ReactTimeAgo  className="Date" date={props.created_at}/></PostHeader>
+                    <PostHeader className="User">{props.username} <ReactTimeAgo  className="Date" date={date}/></PostHeader>
                     <PostContent className="Content">{props.content}</PostContent>
                 </div>
             </Row>

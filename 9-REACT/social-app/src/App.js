@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import NewPost from './NewPost';
 import Feed from './Feed';
 import Signup from './Signup';
 import Login from './Login';
@@ -22,7 +23,7 @@ function App() {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem('jwt_token') ? localStorage.getItem('jwt_token') : ''
+      'Authorization': 'Bearer ' + (localStorage.getItem('user_data') !== null ? JSON.parse(localStorage.getItem('user_data')).jwt_token : '')
     }
   };
 
@@ -75,19 +76,19 @@ function App() {
               <Link to="/">Home</Link>
             </NavListItem>
             {
-              (!isLoggedIn ?
+              (isLoggedIn ?
+                <>
+                  <NavListItem>
+                    <Link to="/login" onClick={logout}>Logout</Link>
+                  </NavListItem>
+                </>
+                :
                 <>
                   <NavListItem>
                     <Link to="/signup">SignUp</Link>
                   </NavListItem>
                   <NavListItem>
                     <Link to="/login">Login</Link>
-                  </NavListItem>
-                </>
-                :
-                <>
-                  <NavListItem>
-                    <Link to="/login" onClick={logout}>Logout</Link>
                   </NavListItem>
                 </>)
             }
@@ -101,16 +102,17 @@ function App() {
 
           <Switch>
             <Route exact path="/">
+              {(isLoggedIn ? <NewPost /> : '')}
               <Feed />
-              <Popup visible={isPopupVisible}>
+              <Popup visible={!isLoggedIn && isPopupVisible}>
                 <Login onLogin={login} />
               </Popup>
             </Route>
             <Route path="/login">
-                <Login onLogin={login} />
+              <Login onLogin={login} />
             </Route>
             <Route path="/signup">
-                <Signup />
+              <Signup />
             </Route>
           </Switch>
         </ContentContainer>
@@ -190,11 +192,11 @@ const Popup = styled.div`
   width: 300px;
   transition: all 1s;
 
-  ${props => (props.visible ? 
-      'bottom: 0px;'
+  ${props => (props.visible ?
+    'bottom: 0px;'
     :
-      'bottom: -250px;'
-    )}
+    'bottom: -250px;'
+  )}
 `;
 
 export default App;

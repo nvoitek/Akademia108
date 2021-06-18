@@ -28,7 +28,7 @@ function Login(props) {
     const onPasswordChange = (e) => {
         setLoginData(prevState => ({
             ...prevState,
-            username : e.target.value
+            password : e.target.value
         }));
     }
 
@@ -73,7 +73,7 @@ function Login(props) {
                 }));
                 setLoginData({username : '', password : ''});
     
-                localStorage.setItem('user_data', res.data);
+                localStorage.setItem('user_data', JSON.stringify(res.data));
 
                 props.onLogin();
     

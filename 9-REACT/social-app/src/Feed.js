@@ -9,7 +9,7 @@ function Feed() {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer ' + localStorage.getItem('jwt_token') ? localStorage.getItem('jwt_token') : ''
+            'Authorization': 'Bearer ' + (localStorage.getItem('user_data') !== null ? JSON.parse(localStorage.getItem('user_data')).jwt_token : '')
         }
     };
 
