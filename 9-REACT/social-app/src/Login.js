@@ -18,19 +18,12 @@ function Login(props) {
 
     const history = useHistory();
 
-    const onUsernameChange = (e) => {
+    const updateFormFields = e => {
         setLoginData(prevState => ({
             ...prevState,
-            username : e.target.value
+            [e.target.name]: e.target.value
         }));
     };
-
-    const onPasswordChange = (e) => {
-        setLoginData(prevState => ({
-            ...prevState,
-            password : e.target.value
-        }));
-    }
 
     const onLogin = (e) => {
         e.preventDefault();
@@ -102,10 +95,10 @@ function Login(props) {
                 <InfoParagraph visible={validationData.isSubmitted}>{validationData.submitMsg}</InfoParagraph>
                 <ErrorParagraph visible={validationData.hasErrors}>{validationData.submitMsg}</ErrorParagraph>
                 <ErrorParagraph visible={validationData.isUsernameEmpty}>Username can't be empty</ErrorParagraph>
-                <Input type="text" placeholder="username" value={loginData.username} onChange={onUsernameChange}/>
+                <Input type="text" name="username" placeholder="username" value={loginData.username} onChange={updateFormFields}/>
 
                 <ErrorParagraph visible={validationData.isPasswordEmpty}>Password can't be empty</ErrorParagraph>
-                <Input type="password" placeholder="password" value={loginData.password} onChange={onPasswordChange}/>
+                <Input type="password" name="password" placeholder="password" value={loginData.password} onChange={updateFormFields}/>
 
                 <Button>Submit</Button>
             </LoginForm>
