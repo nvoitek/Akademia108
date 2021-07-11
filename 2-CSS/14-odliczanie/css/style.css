@@ -1,0 +1,65 @@
+* {
+    background-color: black;
+  }
+  
+  div {
+    visibility: hidden;
+    font-size: 5em;
+    color: white;
+    position: absolute;
+    top:0%;
+    left:0%;
+    animation-name: cnt;
+    animation-duration: 1s;
+  }
+  
+  #li10 {
+    animation-delay: 0s;
+  }
+  
+  #li9 {
+    animation-delay: 1s;
+  }
+  
+  #li8 {
+    animation-delay: 2s;
+  }
+  
+  #li7 {
+    animation-delay: 3s;
+  }
+  
+  #li6 {
+    animation-delay: 4s;
+  }
+  
+  #li5 {
+    animation-delay: 5s;
+  }
+  
+  #li4 {
+    animation-delay: 6s;
+  }
+  
+  #li3 {
+    animation-delay: 7s;
+  }
+  
+  #li2 {
+    animation-delay: 8s;
+  }
+  
+  #li1 {
+    animation-delay: 9s;
+  }
+  
+  #li0 {
+    animation-delay: 10s;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes cnt {
+    100% {
+      visibility: visible;
+    }
+  }

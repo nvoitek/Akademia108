@@ -1,0 +1,25 @@
+.outer {
+    width: 400px;
+    height: 400px;
+    background-color: #a6a9b6;
+    position: relative;
+    border: 10px #666360 solid;
+}
+
+.inner {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+
+.orange {
+    background-color: #ff912e;
+    bottom: 0px;
+    left: 0px;
+}
+
+.grey {
+    background-color: #e4e4e4;
+    top: 0px;
+    right: 0px;
+}
