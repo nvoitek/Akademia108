@@ -7,7 +7,7 @@ function getRandomStr(length) {
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for ( var i = 0; i < length; i++ ) {
-      result += chars.charAt(getRandomInt(0, char.length));
+      result += chars.charAt(getRandomInt(0, chars.length));
     }
 
     return result;
