@@ -1,0 +1,13 @@
+.Step {
+    margin: 5px;
+    font-size: 2.4em;
+}
+
+.Step label {
+    color: blue;
+}
+
+.Step input {
+    width: 150px;
+    font-size: 1.2em;
+}
